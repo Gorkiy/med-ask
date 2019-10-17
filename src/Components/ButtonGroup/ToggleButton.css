@@ -1,0 +1,22 @@
+.toggle {
+  padding: 8px 30px;
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  font-size: 18px;
+  line-height: 25px;
+  cursor: pointer;
+}
+
+.toggle--left {
+  border-right: none;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.toggle--right {
+  /* border-left: none; */
+  border-radius: 0px 5px 5px 0px;
+}
+
+.toggle--active {
+  background-color: #ED462F;
+  color: white;
+}

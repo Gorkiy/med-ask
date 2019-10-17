@@ -4,15 +4,14 @@ import './App.css';
 import Form from '../Form/Form';
 
 class App extends Component {
-  // const policy = checkPolicy('1234 12345678');
-  // console.log(policy);
+  
   onFormSubmit(number) {
     console.log(number);
   }
   
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <Form onSubmit={this.onFormSubmit}/>
       </div>
     );
