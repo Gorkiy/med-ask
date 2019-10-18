@@ -1,4 +1,4 @@
-const policiesData = require('./policies.json');
+const policiesData = require('./data/policies.json');
 
 export function checkPolicy(number) {  
   for (let policy of policiesData) {

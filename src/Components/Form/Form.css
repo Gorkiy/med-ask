@@ -53,7 +53,6 @@
 .form__input {
   padding: 6px 20px;
   width: 100%;
-  
   background-color: #FFFFFF;
   border: 1px solid #868686;
   border-radius: 50px;
@@ -62,8 +61,16 @@
   color: #868686;
 }
 
+.form__input:focus {
+  color: #000000;
+}
+
 .form__input--number {
   margin-right: 25px;
+}
+
+.form__autocomplete {
+  position: relative;
 }
 
 .form__button {

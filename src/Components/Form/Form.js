@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Form.css';
-
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
+import Autocomplete from '../Autocomplete/Autocomplete';
+import './Form.css';
 
 class Form extends Component {
   constructor(props) {
@@ -47,9 +47,10 @@ class Form extends Component {
            <div className="form__fields--group">
             <legend className="form__legend">
               <h3 className="form-subheading">Выберите медицинские услуги</h3>
-            </legend>   
-            <input className="form__input" type="text" name="services"  
-              placeholder="Введите запрашиваемую услугу для пациента" aria-label="Введите запрашиваемую услугу для пациента" />
+            </legend>
+            <div className="form__autocomplete">
+              <Autocomplete />
+            </div>
           </div>
           <button className="form__button" type="submit" ref={this.buttonRef} aria-label="Проверить полис">Проверить</button>
         </form>

@@ -1,0 +1,42 @@
+[
+  {
+    "service": "Первичный приём врача- стоматолога терапевта",
+    "included": true
+  },
+  {
+    "service": "Полирование челюсти",
+    "included": true
+  },
+  {
+    "service": "Снятие камней с 1 зуба",
+    "included": true
+  },
+  {
+    "service": "Рентген верхней и нижней челюстей",
+    "included": true
+  },
+  {
+    "service": "МРТ грудной клетки",
+    "included": true
+  },
+  {
+    "service": "МРТ челюсти",
+    "included": false
+  },
+  {
+    "service": "Рентген грудной клетки",
+    "included": false
+  },
+  {
+    "service": "Исследование функции внешнего дыхания",
+    "included": false
+  },
+  {
+    "service": "Денситометрия",
+    "included": false
+  },
+  {
+    "service": "МРТ головного мозга",
+    "included": false
+  }
+]
