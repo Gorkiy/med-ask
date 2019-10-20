@@ -5,18 +5,18 @@ import './ButtonGroup.css';
 class ButtonGroup extends Component {
   constructor(props) {
     super(props);
-    this.state = { toggle: ''};
+    this.state = { type: ''};
   }
   
   componentDidUpdate(prevProps) {
     if (prevProps.type !== this.props.type) {
-      console.log('type changed');
+      this.setState({type: this.props.type});
     }
   }
   
   onButtonClick = buttonName => {
-    if (this.state.toggle !== buttonName) {
-      this.setState({ toggle: buttonName})
+    if (this.state.type !== buttonName) {
+      this.setState({ type: buttonName})
       this.props.onTypeChange(buttonName);
     }
   }
@@ -29,7 +29,7 @@ class ButtonGroup extends Component {
               let edge = i === 0 ? "left" : "mid";
               if (i + 1 === this.props.buttons.length) edge = "right";
               
-              return <ToggleButton key={i} onClick={this.onButtonClick} buttonText={button} isActive={button === this.state.toggle} edge={edge} />
+              return <ToggleButton key={i} onClick={this.onButtonClick} buttonText={button} isActive={button === this.state.type} edge={edge} />
             }
           )}
         </div>

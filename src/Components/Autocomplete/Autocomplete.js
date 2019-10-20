@@ -25,6 +25,10 @@ class Autocomplete extends Component {
   componentWillUnmount() {
     document.removeEventListener('click', this.blurServiceInput);
   }
+  
+  componentDidUpdate() {
+    // console.log(this.props);
+  }
 
   getSuggestions(term) {
     const reg = new RegExp(`^${term}`, 'i');
@@ -69,6 +73,7 @@ class Autocomplete extends Component {
     if (!suggestions.length) this.setState({ isShown: false });
     this.setState({ suggestions });
     this.setState({ selectedServices });
+    this.props.onServicesChange(selectedServices);
     this.setState({ unselectedServices });
   }
   
@@ -102,6 +107,7 @@ class Autocomplete extends Component {
     let {selectedServices} = this.state;
     selectedServices = selectedServices.filter(item => (item !== serviceName) );
     this.setState({ selectedServices });
+    this.props.onServicesChange(selectedServices);
   }
   
   onServicesFocus = e => {

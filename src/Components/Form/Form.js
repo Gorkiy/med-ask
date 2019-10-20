@@ -3,6 +3,7 @@ import ButtonGroup from '../ButtonGroup/ButtonGroup';
 import Autocomplete from '../Autocomplete/Autocomplete';
 import Dropdown from '../Dropdown/Dropdown';
 import './Form.css';
+import {checkPolicy} from '../../Utils/System';
 
 class Form extends Component {
   constructor(props) {
@@ -10,7 +11,9 @@ class Form extends Component {
     this.state = { 
       number: '',
       buttonGroup: ['ДМС', 'ОМС'],
-      selectedType: ''
+      selectedType: '',
+      company: '',
+      selectedServices: []
      };
     this.policyNumber = React.createRef();
     this.buttonRef = React.createRef();
@@ -18,18 +21,25 @@ class Form extends Component {
   
   componentDidUpdate() {
     // console.log(this.state);
+    console.log(this.state.selectedType);
   }
   
   onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.onSubmit(this.state.number);
+    console.log('submitted: ' + this.state.number);
+    
+    const policy = checkPolicy(this.state.number);
+    console.log(policy);
+    if (policy) {
+      this.setState({selectedType: policy[0]});
+      this.setState({company: policy[1]});
+    }
   }
   
-  onNumberChange = (e) => {
-    this.setState({ number: e.target.value });
-  }
-  
+  onNumberChange = e => this.setState({ number: e.target.value });
   onTypeChange = type => this.setState({ selectedType: type});
+  onCompanyChange = company => this.setState({ company});
+  onServicesChange = services => this.setState({ selectedServices: services });
   
   render() {
     return (
@@ -43,7 +53,7 @@ class Form extends Component {
               onChange={this.onNumberChange} placeholder="Введите номер полиса" aria-label="Введите номер полиса" />
               {/*<input className="form__input" type="text" name="sk-name"  
                placeholder="Выберите страховую компанию" aria-label="Выберите страховую компанию" />*/}
-               <Dropdown />
+               <Dropdown company={this.state.company} onCompanyChange={this.onCompanyChange} />
              </div>
            </div>
            <div className="form__fields--group">
@@ -51,7 +61,7 @@ class Form extends Component {
               <h3 className="form-subheading">Выберите медицинские услуги</h3>
             </legend>
             <div className="form__autocomplete">
-              <Autocomplete />
+              <Autocomplete selected={this.state.selectedServices} onServicesChange={this.onServicesChange}/>
             </div>            
           </div>
           <button className="form__button" type="submit" ref={this.buttonRef} aria-label="Проверить полис">Проверить</button>

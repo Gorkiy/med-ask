@@ -9,8 +9,6 @@ class Dropdown extends Component {
       company: '',
       isShown: false,
      };
-     this.container = React.createRef();
-     this.select = React.createRef();
   }
   
   componentDidMount() {
@@ -19,6 +17,12 @@ class Dropdown extends Component {
 
   componentWillUnmount() {
     document.removeEventListener('click', this.blurSelect);
+  }
+  
+  componentDidUpdate(prevProps) {
+    if (prevProps.company !== this.props.company) {
+      this.setState({company: this.props.company});
+    }
   }
   
   renderSelect() {
@@ -57,6 +61,7 @@ class Dropdown extends Component {
   onSelectClick = e => {
     if (this.state.isShown) {
       this.setState({company: ''});
+      this.props.onCompanyChange('');
     }
     
     if (e.target.closest('.companies-select')) {
@@ -66,6 +71,7 @@ class Dropdown extends Component {
   
   onCompanyClick = e => {
     const company = e.target.closest('li').lastChild.innerText;
+    this.props.onCompanyChange(company);
     this.setState({company});
     this.setState({isShown: !this.state.isShown});
   }
@@ -74,22 +80,16 @@ class Dropdown extends Component {
     if (!e.target.closest('.companies-list') && !e.target.closest('.companies-wrap') && !e.target.closest('.companies-select__selected')) {
       this.setState({isShown: false});
     }
-    // if (!this.container.current.contains(e.target) && this.state.isShown) {
-    //   setTimeout(function() {
-    //     console.log('close');
-    //   }, 1000);
-    // }
   }
     
   render() {
     const isShown = this.state.isShown;
     
     return (
-      <div className="companies-wrap" ref={this.container}>
-        <div className={`companies-select ${isShown ? 'companies-select--open' : ''}`} onClick={this.onSelectClick} ref={this.select}>{this.renderSelect()}
+      <div className="companies-wrap">
+        <div className={`companies-select ${isShown ? 'companies-select--open' : ''}`} onClick={this.onSelectClick}>{this.renderSelect()}
         </div>
-        {this.renderCompanies()}
-        
+        {this.renderCompanies()}    
       </div>
     );
   }
