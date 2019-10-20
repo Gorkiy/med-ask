@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
 import Autocomplete from '../Autocomplete/Autocomplete';
+import Dropdown from '../Dropdown/Dropdown';
 import './Form.css';
 
 class Form extends Component {
@@ -40,8 +41,9 @@ class Form extends Component {
             <div className="form__two-col">            
               <input className="form__input form__input--number" type="text" name="policy-number" ref={this.policyNumber} value={this.state.number} 
               onChange={this.onNumberChange} placeholder="Введите номер полиса" aria-label="Введите номер полиса" />
-              <input className="form__input" type="text" name="sk-name"  
-               placeholder="Выберите страховую компанию" aria-label="Выберите страховую компанию" />
+              {/*<input className="form__input" type="text" name="sk-name"  
+               placeholder="Выберите страховую компанию" aria-label="Выберите страховую компанию" />*/}
+               <Dropdown />
              </div>
            </div>
            <div className="form__fields--group">
@@ -50,7 +52,7 @@ class Form extends Component {
             </legend>
             <div className="form__autocomplete">
               <Autocomplete />
-            </div>
+            </div>            
           </div>
           <button className="form__button" type="submit" ref={this.buttonRef} aria-label="Проверить полис">Проверить</button>
         </form>

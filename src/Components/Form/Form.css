@@ -42,22 +42,19 @@
   width: 100%;
 }
 
-.form__fields-group--policy {
-}
-
 .form__two-col {
   display: flex;
   justify-content: space-between;
 }
 
 .form__input {
-  padding: 6px 20px;
+  padding: 0px 20px;
   width: 100%;
   background-color: #FFFFFF;
   border: 1px solid #868686;
   border-radius: 50px;
   font-size: 14px;
-  line-height: 19px;
+  line-height: 34px;
   color: #868686;
 }
 
