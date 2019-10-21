@@ -1,8 +1,10 @@
 .toggle {
   padding: 8px 30px;
+  margin: 0;
   border: 1px solid rgba(0, 0, 0, 0.13);
   font-size: 18px;
   line-height: 25px;
+  background-color: white;
   cursor: pointer;
 }
 

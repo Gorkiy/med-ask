@@ -35,6 +35,8 @@ class Autocomplete extends Component {
     
     if (prevProps.selected.length !== this.props.selected.length && !this.props.selected.length) {
       this.setState({ selectedServices: []});
+      const unselectedServices = this.services.map(item => item.service);
+      this.setState({unselectedServices});
     }
   }
 

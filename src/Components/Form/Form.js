@@ -105,7 +105,7 @@ class Form extends Component {
       <div className="form-container">
         <h2 className="form-heading">Проверка услуг медицинского страхования</h2>
         <form className="form" onSubmit={this.onFormSubmit}>
-          <ButtonGroup buttons={this.state.buttonGroup} onTypeChange={this.onTypeChange} type={this.state.selectedType} />
+          <ButtonGroup buttons={this.state.buttonGroup} onTypeChange={this.onTypeChange} type={this.state.selectedType} isSubmitted={this.state.isSubmitted} />
           <div className="form__fields--group form__fields--group--policy">
             <div className="form__two-col">            
               <input className="form__input form__input--number" type="text" name="policy-number" ref={this.policyNumber} value={this.state.number} 

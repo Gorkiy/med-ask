@@ -14,7 +14,7 @@ class ButtonGroup extends Component {
   }
   
   onButtonClick = buttonName => {
-    if (this.state.type !== buttonName) {
+    if (!this.props.isSubmitted && this.state.type !== buttonName) {
       this.setState({ type: buttonName})
       this.props.onTypeChange(buttonName);
     }

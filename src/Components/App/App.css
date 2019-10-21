@@ -29,6 +29,10 @@ body {
   background-color: #D8D8F2;
 }
 
+input {
+  margin: 0;
+}
+
 .app {
   position: fixed;
   z-index: 2;
