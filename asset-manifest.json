@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/med-ask/static/css/main.53d7f580.chunk.css",
-    "main.js": "/med-ask/static/js/main.88bab81d.chunk.js",
-    "main.js.map": "/med-ask/static/js/main.88bab81d.chunk.js.map",
+    "main.css": "/med-ask/static/css/main.dd618871.chunk.css",
+    "main.js": "/med-ask/static/js/main.dbaf5d45.chunk.js",
+    "main.js.map": "/med-ask/static/js/main.dbaf5d45.chunk.js.map",
     "runtime-main.js": "/med-ask/static/js/runtime-main.e4cbcbb9.js",
     "runtime-main.js.map": "/med-ask/static/js/runtime-main.e4cbcbb9.js.map",
     "static/js/2.550dea86.chunk.js": "/med-ask/static/js/2.550dea86.chunk.js",
     "static/js/2.550dea86.chunk.js.map": "/med-ask/static/js/2.550dea86.chunk.js.map",
     "index.html": "/med-ask/index.html",
-    "precache-manifest.a780a8da81a836e01219ec49cf481014.js": "/med-ask/precache-manifest.a780a8da81a836e01219ec49cf481014.js",
+    "precache-manifest.073c6d5086a6c8f1db1edfeed2b12e17.js": "/med-ask/precache-manifest.073c6d5086a6c8f1db1edfeed2b12e17.js",
     "service-worker.js": "/med-ask/service-worker.js",
-    "static/css/main.53d7f580.chunk.css.map": "/med-ask/static/css/main.53d7f580.chunk.css.map",
+    "static/css/main.dd618871.chunk.css.map": "/med-ask/static/css/main.dd618871.chunk.css.map",
     "static/media/Autocomplete.css": "/med-ask/static/media/icon-delete.59f9ddd5.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.e4cbcbb9.js",
     "static/js/2.550dea86.chunk.js",
-    "static/css/main.53d7f580.chunk.css",
-    "static/js/main.88bab81d.chunk.js"
+    "static/css/main.dd618871.chunk.css",
+    "static/js/main.dbaf5d45.chunk.js"
   ]
 }
