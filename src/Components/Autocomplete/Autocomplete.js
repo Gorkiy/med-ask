@@ -26,8 +26,17 @@ class Autocomplete extends Component {
     document.removeEventListener('click', this.blurServiceInput);
   }
   
-  componentDidUpdate() {
-    // console.log(this.props);
+  componentDidUpdate(prevProps) {
+    if (prevProps.isSubmitted !== this.props.isSubmitted && this.props.isSubmitted) {
+      this.serviceInput.current.disabled = true;
+    } else {
+      this.serviceInput.current.disabled = false;
+    }
+    
+    if (prevProps.selected.length !== this.props.selected.length && !this.props.selected.length) {
+      console.log('tes');
+      this.setState({ selectedServices: []});
+    }
   }
 
   getSuggestions(term) {
@@ -48,10 +57,42 @@ class Autocomplete extends Component {
       return null;
     } else {
       return (
-        <ul className="autocomplete__suggestions" onClick={this.onSuggestionClick}>
-          {this.state.suggestions.map((el, i) => <li key={i} className="autocomplete__suggestions--item">{el}</li>)}
+        <ul className="suggestions-list" onClick={this.onSuggestionClick}>
+          {this.state.suggestions.map((el, i) => <li key={i} className="suggestions-list__item">{el}</li>)}
         </ul>
       )
+    }
+  }
+  
+  renderServices() {
+    if (!this.props.isSubmitted) {
+      return this.state.selectedServices.map((el, i) => 
+        <li key={i} className="services-list__item">
+          <span className="services-list__option">
+            {el}
+          </span>
+          <button className="services-list__delete" type="button" aria-label="Удалить услугу" onClick={this.onDeleteClick}></button>
+        </li>)
+    } else {
+      // Сортировка сервисов по статусу перед рендером
+      const selected = [...this.state.selectedServices];
+      selected.sort((a, b) => {
+        const serviceA = this.services.filter(item => item.service === a)[0];
+        const serviceB = this.services.filter(item => item.service === b)[0];
+        if (!serviceA && !serviceB) return 1;
+        if (serviceA && serviceB) return serviceB.included - serviceA.included;
+      });
+      
+      return selected.map((el, i) => {
+        let modifier ='undefined';
+        const service = this.services.filter(item => item.service === el)[0];
+        if (service) modifier = service.included ? 'true' : 'false';
+        return <li key={i} className="services-list__item">
+          <span className={`services-list__option services-list__option--${modifier}`}>
+            {el}
+          </span>
+        </li>
+      })  
     }
   }
   
@@ -118,13 +159,14 @@ class Autocomplete extends Component {
   }
   
   blurServiceInput = e => {
-    if (!e.target.closest('.autocomplete-wrap')) {
+    if (!e.target.closest('.autocomplete-wrap') && !this.props.isSubmitted) {
       this.serviceInput.current.blur();
       this.setState({isShown: false});
     }
   }
     
   render() {
+    
     return (
       <React.Fragment>
         <div className="autocomplete-wrap">
@@ -145,14 +187,8 @@ class Autocomplete extends Component {
             {this.renderSuggestions()}
           </div>
         </div>
-        <ul className="autocomplete__selected" onClick={this.onSelectedClick} onKeyDown={this.addServiceHandler}>
-          {this.state.selectedServices.map((el, i) => 
-            <li key={i} className="autocomplete__selected--item">
-              <span className="autocomplete__selected--option">
-                {el}
-              </span>
-              <button className="autocomplete__selected--delete" type="button" aria-label="Удалить услугу" onClick={this.onDeleteClick}></button>
-            </li>)}
+        <ul className="services-list" onClick={this.onSelectedClick} onKeyDown={this.addServiceHandler}>
+          {this.renderServices()}
         </ul>
       </React.Fragment>
     );

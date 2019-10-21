@@ -50,7 +50,7 @@ class Dropdown extends Component {
         <ul className="companies-list">
           {companies.map((el, i) => 
             <li key={i} className="companies-list__item" onClick={this.onCompanyClick}>
-              <img alt={el.sk} className="companies-list__logo" src={require(`../../images/logos/${el.logo}`)}/>
+              <img alt={el.sk} className="companies-list__logo" src={require(`../../images/logos/${el.logo}`)} width="25" height="25" />
               <span className="companies-list__name">{el.sk}</span>
             </li>)}
         </ul>
@@ -59,13 +59,15 @@ class Dropdown extends Component {
   }
   
   onSelectClick = e => {
-    if (this.state.isShown) {
-      this.setState({company: ''});
-      this.props.onCompanyChange('');
-    }
-    
-    if (e.target.closest('.companies-select')) {
-      this.setState({isShown: !this.state.isShown});
+    if (!this.props.isSubmitted) {
+      if (this.state.isShown) {
+        this.setState({company: ''});
+        this.props.onCompanyChange('');
+      }
+      
+      if (e.target.closest('.companies-select')) {
+        this.setState({isShown: !this.state.isShown});
+      }
     }
   }
   

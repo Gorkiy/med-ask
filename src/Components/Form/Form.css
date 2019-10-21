@@ -5,7 +5,6 @@
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  /* TODO: fix min-width */
   min-width: 960px;
   border-radius: 15px;
   background-color: white;
@@ -71,12 +70,24 @@
 }
 
 .form__button {
+  border: 1px solid #ED462F;
   margin-top: 30px;
   padding: 6px 18px;
-  border: 1px solid #ED462F;
-  border-radius: 50px;
   font-size: 18px;
   line-height: 25px;
   text-align: center;
+  border-radius: 50px;
+  background-color: #ED462F;
+  color: white;
+}
+
+.form__button--new {
+  background-color: #66D1C6;
+  border: 1px solid #66D1C6;
+}
+
+.form__button:disabled {
+  text-align: center;
+  background-color: white;
   color: #ED462F;
 }

@@ -13,35 +13,84 @@ class Form extends Component {
       buttonGroup: ['ДМС', 'ОМС'],
       selectedType: '',
       company: '',
-      selectedServices: []
+      selectedServices: [],
+      ready: false,
+      isSubmitted: false
      };
-    this.policyNumber = React.createRef();
     this.buttonRef = React.createRef();
   }
   
-  componentDidUpdate() {
-    // console.log(this.state);
-    console.log(this.state.selectedType);
+  componentDidMount() {
+    this.buttonRef.current.disabled = true;
   }
   
-  onFormSubmit = (event) => {
-    event.preventDefault();
-    console.log('submitted: ' + this.state.number);
-    
-    const policy = checkPolicy(this.state.number);
-    console.log(policy);
-    if (policy) {
-      this.setState({selectedType: policy[0]});
-      this.setState({company: policy[1]});
+  checkIfReady() {
+    if (this.state.number && this.state.selectedType && this.state.company && this.state.selectedServices.length) {
+      this.setState({ready: true});
+      this.buttonRef.current.disabled = false;
+    } else {
+      this.setState({ready: false});
+      this.buttonRef.current.disabled = true;
     }
   }
   
-  onNumberChange = e => this.setState({ number: e.target.value });
-  onTypeChange = type => this.setState({ selectedType: type});
-  onCompanyChange = company => this.setState({ company});
-  onServicesChange = services => this.setState({ selectedServices: services });
+  renderButton() {
+    if (!this.state.isSubmitted) {
+      return (
+        <button className="form__button" type="submit" ref={this.buttonRef} aria-label="Проверить полис">Проверить</button>
+      )
+    } else {
+      return (
+        <button className="form__button form__button--new" type="submit" ref={this.buttonRef} aria-label="Новый запрос">Новый запрос</button>
+      )
+    }
+  }
+  
+  onFormSubmit = e => {
+    e.preventDefault();
+
+    if (!this.state.isSubmitted) {
+      this.setState({isSubmitted: true});
+    } else {
+      this.setState({ number: '' });
+      this.setState({ selectedType: '' });
+      this.setState({ company: '' });
+      this.setState({ selectedServices: [] });
+      this.setState({ ready: false });
+      this.setState({ isSubmitted: false });
+      this.buttonRef.current.disabled = true;
+    }
+    
+    // console.log(this.state.selectedServices);
+  }
+  
+  onNumberChange = async e => {
+    await this.setState({ number: e.target.value });
+    const policy = checkPolicy(this.state.number);
+    if (policy) {
+      await this.setState({selectedType: policy[0]});
+      await this.setState({company: policy[1]});
+    }
+    this.checkIfReady();
+  }
+  
+  onTypeChange = async type => {
+    await this.setState({ selectedType: type});
+    this.checkIfReady();
+  } 
+  
+  onCompanyChange = async company => {
+    await this.setState({ company});
+    this.checkIfReady();
+  }
+  
+  onServicesChange = async services => {
+    await this.setState({ selectedServices: services });
+    this.checkIfReady();
+  }
   
   render() {
+    const isDisabled = this.state.isSubmitted ? "disabled" : "";
     return (
       <div className="form-container">
         <h2 className="form-heading">Проверка услуг медицинского страхования</h2>
@@ -50,10 +99,8 @@ class Form extends Component {
           <div className="form__fields--group form__fields--group--policy">
             <div className="form__two-col">            
               <input className="form__input form__input--number" type="text" name="policy-number" ref={this.policyNumber} value={this.state.number} 
-              onChange={this.onNumberChange} placeholder="Введите номер полиса" aria-label="Введите номер полиса" />
-              {/*<input className="form__input" type="text" name="sk-name"  
-               placeholder="Выберите страховую компанию" aria-label="Выберите страховую компанию" />*/}
-               <Dropdown company={this.state.company} onCompanyChange={this.onCompanyChange} />
+              onChange={this.onNumberChange} placeholder="Введите номер полиса" aria-label="Введите номер полиса" disabled={this.state.isSubmitted}/>
+               <Dropdown isSubmitted={this.state.isSubmitted} company={this.state.company} onCompanyChange={this.onCompanyChange} />
              </div>
            </div>
            <div className="form__fields--group">
@@ -61,10 +108,10 @@ class Form extends Component {
               <h3 className="form-subheading">Выберите медицинские услуги</h3>
             </legend>
             <div className="form__autocomplete">
-              <Autocomplete selected={this.state.selectedServices} onServicesChange={this.onServicesChange}/>
+              <Autocomplete isSubmitted={this.state.isSubmitted} selected={this.state.selectedServices} onServicesChange={this.onServicesChange}/>
             </div>            
           </div>
-          <button className="form__button" type="submit" ref={this.buttonRef} aria-label="Проверить полис">Проверить</button>
+          {this.renderButton()}
         </form>
       </div>
     );
