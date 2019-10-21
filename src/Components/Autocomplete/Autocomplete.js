@@ -166,7 +166,6 @@ class Autocomplete extends Component {
   }
     
   render() {
-    
     return (
       <React.Fragment>
         <div className="autocomplete-wrap">

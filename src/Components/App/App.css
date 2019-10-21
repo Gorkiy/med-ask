@@ -30,7 +30,6 @@ body {
 }
 
 .app {
-  /* display: none; */
   position: fixed;
   z-index: 2;
   left: 0;
@@ -40,4 +39,42 @@ body {
   overflow: auto;
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.6);
+}
+
+.modal {
+  padding: 5px 50px 25px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border-radius: 15px;
+  background-color: white;
+  text-align: center;
+}
+
+.modal__title {
+  width: 300px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.button {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 6px 18px;
+  min-width: 165px;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  border-radius: 50px;
+  border: 1px solid #ED462F;
+  background-color: #FFFFFF;
+  color: #ED462F;
+}
+
+.button:hover {
+  border: 1px solid #ED462F;
+  background-color: #ED462F;
+  color: #FFFFFF;
 }

@@ -7,10 +7,7 @@
   display: none;
   border-radius: 15px;
   background-color: white;
-  z-index: 1;
   border: 1px solid #66D1C6;
-  /* overflow-y: scroll;
-  max-height: 200px; */
 }
 
 .autocomplete--show {
@@ -34,10 +31,10 @@
 }
 
 .services-list {
-  -moz-column-count: 2;
-       column-count: 2;
-   -moz-column-fill: balance;
-        column-fill: balance;
+  -webkit-column-count: 2;
+          column-count: 2;
+   -webkit-column-fill: balance;
+           column-fill: balance;
   min-height: 150px;
   list-style: none;
   margin: 35px 0 0 0;
@@ -45,7 +42,6 @@
 }
 
 .services-list__item {
-  /* width: 45%; */
   margin: 0 10px 15px 20px;
 }
 
@@ -59,7 +55,8 @@
   width: 18px;
   height: 18px;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 17px;
+  background-position: center;
 }
 
 .services-list__option--false::before {

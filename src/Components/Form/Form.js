@@ -53,11 +53,13 @@ class Form extends Component {
 
     if (!this.state.isSubmitted) {
       this.setState({isSubmitted: true});
-      
-      
       const policy = policies[this.state.number];
-      if (policy) this.setState({ policy });
-      
+      if (policy) {
+        this.setState({ policy });
+      } else {
+        this.setState({ policy: null });
+      }
+      this.props.onSubmit(policy);
       
     } else {
       this.setState({ number: '' });
@@ -66,10 +68,9 @@ class Form extends Component {
       this.setState({ selectedServices: [] });
       this.setState({ ready: false });
       this.setState({ isSubmitted: false });
+      this.setState({ policy: null });
       this.buttonRef.current.disabled = true;
     }
-    
-    // console.log(this.state.selectedServices);
   }
   
   onNumberChange = async e => {

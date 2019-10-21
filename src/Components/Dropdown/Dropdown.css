@@ -23,8 +23,12 @@
 }
 
 .companies-select__selected {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .companies-select__phone {
@@ -35,25 +39,28 @@
 }
 
 .companies-list {
-  list-style: none;
+  z-index: 1;
   margin: 0;
   padding: 12px 0;
   position: absolute;
   top: 31px;
   left: 0;
   right: 0;
-  /* display: none; */
+  list-style: none;
   border-radius: 0 0 15px 15px;
   background-color: white;
-  z-index: 1;
   border: 1px solid #66D1C6;
   border-top: none;
 }
 
 .companies-list__item {
   padding: 10px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .companies-list__item:hover {

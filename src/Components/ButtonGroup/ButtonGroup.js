@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ToggleButton from './ToggleButton';
-import './ButtonGroup.css';
 
 class ButtonGroup extends Component {
   constructor(props) {
