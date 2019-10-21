@@ -4,6 +4,7 @@ import Autocomplete from '../Autocomplete/Autocomplete';
 import Dropdown from '../Dropdown/Dropdown';
 import './Form.css';
 import {checkPolicy} from '../../Utils/System';
+const policies = require('../../Utils/data/policies.json');
 
 class Form extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class Form extends Component {
       company: '',
       selectedServices: [],
       ready: false,
-      isSubmitted: false
+      isSubmitted: false,
+      policy: null
      };
     this.buttonRef = React.createRef();
   }
@@ -51,6 +53,12 @@ class Form extends Component {
 
     if (!this.state.isSubmitted) {
       this.setState({isSubmitted: true});
+      
+      
+      const policy = policies[this.state.number];
+      if (policy) this.setState({ policy });
+      
+      
     } else {
       this.setState({ number: '' });
       this.setState({ selectedType: '' });
@@ -90,7 +98,8 @@ class Form extends Component {
   }
   
   render() {
-    const isDisabled = this.state.isSubmitted ? "disabled" : "";
+    const date = this.state.isSubmitted && this.state.policy ? this.state.policy.date : null;
+    
     return (
       <div className="form-container">
         <h2 className="form-heading">Проверка услуг медицинского страхования</h2>
@@ -100,7 +109,10 @@ class Form extends Component {
             <div className="form__two-col">            
               <input className="form__input form__input--number" type="text" name="policy-number" ref={this.policyNumber} value={this.state.number} 
               onChange={this.onNumberChange} placeholder="Введите номер полиса" aria-label="Введите номер полиса" disabled={this.state.isSubmitted}/>
-               <Dropdown isSubmitted={this.state.isSubmitted} company={this.state.company} onCompanyChange={this.onCompanyChange} />
+              <span className="form__policy-date">
+                { date }
+              </span>
+             <Dropdown isSubmitted={this.state.isSubmitted} company={this.state.company} onCompanyChange={this.onCompanyChange} />
              </div>
            </div>
            <div className="form__fields--group">

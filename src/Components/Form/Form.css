@@ -42,8 +42,16 @@
 }
 
 .form__two-col {
+  position: relative;
   display: flex;
   justify-content: space-between;
+}
+
+.form__policy-date {
+  position: absolute;
+  bottom: -25px;
+  left: 20px;
+  font-size: 12px;
 }
 
 .form__input {

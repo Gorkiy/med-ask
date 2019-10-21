@@ -34,7 +34,6 @@ class Autocomplete extends Component {
     }
     
     if (prevProps.selected.length !== this.props.selected.length && !this.props.selected.length) {
-      console.log('tes');
       this.setState({ selectedServices: []});
     }
   }
@@ -81,6 +80,7 @@ class Autocomplete extends Component {
         const serviceB = this.services.filter(item => item.service === b)[0];
         if (!serviceA && !serviceB) return 1;
         if (serviceA && serviceB) return serviceB.included - serviceA.included;
+        return 1;
       });
       
       return selected.map((el, i) => {

@@ -7,6 +7,7 @@ class Dropdown extends Component {
     super(props);
     this.state = {
       company: '',
+      phone: '',
       isShown: false,
      };
   }
@@ -22,6 +23,9 @@ class Dropdown extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.company !== this.props.company) {
       this.setState({company: this.props.company});
+
+      const company = companies.filter(item => item.sk === this.props.company)[0];
+      if (company) this.setState({ phone: company.phone });
     }
   }
   
@@ -30,8 +34,8 @@ class Dropdown extends Component {
       if (!this.state.company) {
         return 'Выберите страховую компанию';
       } else {
-        const companyObj = companies.filter(item => item.sk === this.state.company)[0];
-        
+        const companyObj = companies.filter(item => item.sk === this.state.company)[0];        
+
         return (
           <div className="companies-select__selected">
             <img alt={companyObj.sk} className="companies-list__logo" src={require(`../../images/logos/${companyObj.logo}`)}/>
@@ -86,11 +90,15 @@ class Dropdown extends Component {
     
   render() {
     const isShown = this.state.isShown;
+    const phone = this.props.isSubmitted ? this.state.phone : null;
     
     return (
       <div className="companies-wrap">
         <div className={`companies-select ${isShown ? 'companies-select--open' : ''}`} onClick={this.onSelectClick}>{this.renderSelect()}
         </div>
+        <span className="companies-select__phone">
+          { phone }
+        </span>
         {this.renderCompanies()}    
       </div>
     );

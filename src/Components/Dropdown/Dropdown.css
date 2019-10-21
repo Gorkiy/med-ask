@@ -27,6 +27,13 @@
   align-items: center;
 }
 
+.companies-select__phone {
+  position: absolute;
+  bottom: -25px;
+  left: 20px;
+  font-size: 12px;
+}
+
 .companies-list {
   list-style: none;
   margin: 0;
